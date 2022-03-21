@@ -1,5 +1,7 @@
 //Created by Aurange
 
+let prev = press = 0;
+
 document.getElementById("scale").onkeypress = function(e){
   e.preventDefault();
 };
@@ -7,10 +9,23 @@ document.getElementById("scale").onkeypress = function(e){
 document.getElementById("scale").oninput = function(){
   if(document.getElementById("in").style.display !== "inline") document.getElementById("in").style.display = "inline";
   if(document.getElementById("canvas").style.display !== "none") document.getElementById("canvas").style.display = "none";
+
+  if(Number(this.value) > prev){
+        if(Number(this.value) ===  6) this.value = 8;
+
+        ++press;
+    }
+    else{
+        if(Number(this.value) === 6) this.value = 4;
+
+        --press;
+    }
+
+    prev = Number(this.value);
 }
 
 document.getElementById("in").onchange = function(){
-  let can = document.getElementById("canvas"), scale = document.getElementById("scale"), ctx = can.getContext("2d"), file = new FileReader(), counter = scale.value / 2;
+  let can = document.getElementById("canvas"), scale = document.getElementById("scale"), ctx = can.getContext("2d"), file = new FileReader();
 
   file.onload = function(){
     let input = new Image();
@@ -52,10 +67,10 @@ document.getElementById("in").onchange = function(){
 
       ctx.putImageData(new ImageData(Uint8ClampedArray.from(upscaled), can.width), 0, 0);
 
-      if(counter !== 1){
+      if(press !== 1){
         input.src = can.toDataURL();
 
-        --counter;
+        --press;
       }
       else{
         message.style.display = "none";
