@@ -84,7 +84,10 @@ document.getElementById("in").onchange = function(){
 
   file.readAsDataURL(this.files[0]);
 
-  document.getElementById("scale").value = null;
+  prev = press = 0;
+
+  scale.value = null;
   this.value = null;
+
   this.blur();
 };
