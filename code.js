@@ -11,7 +11,8 @@ document.getElementById("scale").oninput = function(){
   if(document.getElementById("canvas").style.display !== "none") document.getElementById("canvas").style.display = "none";
 
   if(Number(this.value) > prev){
-    if(Number(this.value) ===  6) this.value = 8;    
+    if(Number(this.value) ===  6) this.value = 8;
+    else if(Number(this.value) === 10) this.value = 16;
 
     ++press;
   }
