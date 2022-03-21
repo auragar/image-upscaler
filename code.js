@@ -73,6 +73,8 @@ document.getElementById("in").onchange = function(){
         --press;
       }
       else{
+        prev = press = 0;
+
         message.style.display = "none";
         scale.style.display = "inline";
         times.style.display = "inline";
@@ -83,8 +85,6 @@ document.getElementById("in").onchange = function(){
   }
 
   file.readAsDataURL(this.files[0]);
-
-  prev = press = 0;
 
   scale.value = null;
   this.value = null;
