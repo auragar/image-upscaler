@@ -10,7 +10,7 @@ document.getElementById("scale").oninput = function(){
 }
 
 document.getElementById("in").onchange = function(){
-  let inElem = this, scale = document.getElementById("scale"), file = new FileReader();
+  let inElem = this, scale = document.getElementById("scale"), file = new FileReader(), sVal = Number(scale.value);
 
   file.onload = function(){
     let input = new Image();
@@ -18,9 +18,7 @@ document.getElementById("in").onchange = function(){
     input.src = file.result;
 
     input.onload = function(){
-      let colors, len, times = document.getElementById("times"), br = document.getElementsByTagName("br")[0], message = document.getElementById("message"), can = document.getElementById("canvas"), sVal = Number(scale.value), oWidth = input.width, ctx = can.getContext("2d"), upscaled = [], storage = [];
-
-      console.log(`scale ${scale}`);
+      let colors, len, times = document.getElementById("times"), br = document.getElementsByTagName("br")[0], message = document.getElementById("message"), can = document.getElementById("canvas"), oWidth = input.width, ctx = can.getContext("2d"), upscaled = [], storage = [];
 
       can.width = oWidth;
       can.height = input.height;
