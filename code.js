@@ -17,7 +17,7 @@ document.getElementById("in").onchange = function(){
 
     input.src = file.result;
 
-    input.onchange = input.onload = function(){
+    input.onload = function(){
       let colors, len, times = document.getElementById("times"), br = document.getElementsByTagName("br")[0], message = document.getElementById("message"), oWidth = input.width, upscaled = [], storage = [];
 
       can.width = oWidth;
