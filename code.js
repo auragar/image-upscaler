@@ -1,6 +1,6 @@
 //Created by Aurange
 
-let inElem = document.getElementById("in"), scale = document.getElementById("scale"), times = document.getElementById("times"), br = document.getElementsByTagName("br")[0], message = document.getElementById("message"), can = document.getElementById("canvas"), ctx = can.getContext("2d");
+let scale = document.getElementById("scale"), times = document.getElementById("times"), inElem = document.getElementById("in"), br = document.getElementsByTagName("br")[0], message = document.getElementById("message"), can = document.getElementById("canvas"), ctx = can.getContext("2d");
 
 document.getElementById("scale").onkeypress = function(e){
   e.preventDefault();
@@ -12,7 +12,7 @@ document.getElementById("scale").oninput = function(){
 }
 
 document.getElementById("in").onchange = function(){
-  let file = new FileReader(), sVal = Number(scale.value);
+  let sVal = Number(scale.value), file = new FileReader();
 
   file.onload = function(){
     let input = new Image();
@@ -65,7 +65,7 @@ document.getElementById("in").onchange = function(){
     }
   }
 
-  file.readAsDataURL(this.files[0]);
+  file.readAsDataURL(inElem.files[0]);
 
   scale.value = null;
   inElem.value = null;
