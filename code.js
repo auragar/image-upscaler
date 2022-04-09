@@ -32,7 +32,7 @@ document.getElementById("in").onchange = function(){
       can.width *= sVal;
       can.height *= sVal;
 
-      console.log(`Canvas: ${can.width}`);
+      console.log(`sVal: ${sVal}`);
 
       scale.style.display = "none";
       times.style.display = "none";
