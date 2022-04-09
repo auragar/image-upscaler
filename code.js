@@ -10,14 +10,10 @@ document.getElementById("scale").oninput = function(){
 }
 
 document.getElementById("in").onchange = function(){
-  let can = document.getElementById("canvas"), scale = document.getElementById("scale"), ctx = can.getContext("2d"), sVal = Number(scale.value), file = new FileReader();
-
-  console.log(`First: ${this}`);
+  let inElem = this, can = document.getElementById("canvas"), scale = document.getElementById("scale"), ctx = can.getContext("2d"), sVal = Number(scale.value), file = new FileReader();
 
   file.onload = function(){
     let input = new Image();
-
-    console.log(`Second: ${this}`);
 
     input.src = file.result;
 
@@ -39,7 +35,7 @@ document.getElementById("in").onchange = function(){
       scale.style.display = "none";
       times.style.display = "none";
       br.style.display = "none";
-      document.getElementById("in").style.display = "none";
+      inElem.style.display = "none";
       message.style.display = "block";
 
       for(let i = 0, j = 1; i < len; i += 4, ++j){
