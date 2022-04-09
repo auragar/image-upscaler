@@ -1,5 +1,7 @@
 //Created by Aurange
 
+let inElem = document.getElementById("in"), scale = document.getElementById("scale"), times = document.getElementById("times"), br = document.getElementsByTagName("br")[0], message = document.getElementById("message"), can = document.getElementById("canvas"), ctx = can.getContext("2d");
+
 document.getElementById("scale").onkeypress = function(e){
   e.preventDefault();
 };
@@ -10,7 +12,7 @@ document.getElementById("scale").oninput = function(){
 }
 
 document.getElementById("in").onchange = function(){
-  let inElem = this, scale = document.getElementById("scale"), file = new FileReader(), sVal = Number(scale.value);
+  let file = new FileReader(), sVal = Number(scale.value);
 
   file.onload = function(){
     let input = new Image();
@@ -18,7 +20,7 @@ document.getElementById("in").onchange = function(){
     input.src = file.result;
 
     input.onload = function(){
-      let colors, len, times = document.getElementById("times"), br = document.getElementsByTagName("br")[0], message = document.getElementById("message"), can = document.getElementById("canvas"), oWidth = input.width, ctx = can.getContext("2d"), upscaled = [], storage = [];
+      let colors, len, oWidth = input.width, upscaled = [], storage = [];
 
       can.width = oWidth;
       can.height = input.height;
@@ -66,7 +68,7 @@ document.getElementById("in").onchange = function(){
   file.readAsDataURL(this.files[0]);
 
   scale.value = null;
-  this.value = null;
+  inElem.value = null;
 
-  this.blur();
+  inElem.blur();
 };
