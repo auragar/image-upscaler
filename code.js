@@ -23,8 +23,6 @@ document.getElementById("in").onchange = function(){
       can.width = oWidth;
       can.height = input.height;
 
-      console.log(`Canvas: ${can.width}`);
-
       ctx.drawImage(input, 0, 0);
 
       colors = ctx.getImageData(0, 0, can.width, can.height).data;
@@ -33,6 +31,8 @@ document.getElementById("in").onchange = function(){
 
       can.width *= sVal;
       can.height *= sVal;
+
+      console.log(`Canvas: ${can.width}`);
 
       scale.style.display = "none";
       times.style.display = "none";
