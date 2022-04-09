@@ -20,10 +20,10 @@ document.getElementById("in").onchange = function(){
     input.onload = function(){
       let colors, len, times = document.getElementById("times"), br = document.getElementsByTagName("br")[0], message = document.getElementById("message"), can = document.getElementById("canvas"), sVal = Number(scale.value), oWidth = input.width, ctx = can.getContext("2d"), upscaled = [], storage = [];
 
-      console.log(`Canvas: ${can}`);
-
       can.width = oWidth;
       can.height = input.height;
+
+      console.log(`Canvas: ${can.width}`);
 
       ctx.drawImage(input, 0, 0);
 
