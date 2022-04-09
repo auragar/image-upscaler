@@ -29,6 +29,8 @@ document.getElementById("scale").oninput = function(){
 document.getElementById("in").onchange = function(){
   let can = document.getElementById("canvas"), scale = document.getElementById("scale"), ctx = can.getContext("2d"), file = new FileReader();
 
+  console.log(scale.value);
+
   file.onload = function(){
     let input = new Image();
 
