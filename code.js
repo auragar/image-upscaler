@@ -1,7 +1,5 @@
 //Created by Aurange
 
-let prev = press = 0;
-
 document.getElementById("scale").onkeypress = function(e){
   e.preventDefault();
 };
@@ -9,30 +7,17 @@ document.getElementById("scale").onkeypress = function(e){
 document.getElementById("scale").oninput = function(){
   if(document.getElementById("in").style.display !== "inline") document.getElementById("in").style.display = "inline";
   if(document.getElementById("canvas").style.display !== "none") document.getElementById("canvas").style.display = "none";
-
-  if(Number(this.value) > prev){
-    if(Number(this.value) ===  6) this.value = 8;
-    else if(Number(this.value) === 10) this.value = 16;
-
-    ++press;
-  }
-  else{
-    if(Number(this.value) === 6) this.value = 4;
-    else if(Number(this.value) === 14) this.value = 8;
-
-    --press;
-  }
-
-  prev = Number(this.value);
 }
 
 document.getElementById("in").onchange = function(){
-  let can = document.getElementById("canvas"), scale = document.getElementById("scale"), ctx = can.getContext("2d"), file = new FileReader();
+  let can = document.getElementById("canvas"), scale = document.getElementById("scale"), ctx = can.getContext("2d"), sVal = Number(scale.value), file = new FileReader();
 
-  console.log(scale.value);
+  console.log(`First: ${this}`);
 
   file.onload = function(){
     let input = new Image();
+
+    console.log(`Second: ${this}`);
 
     input.src = file.result;
 
@@ -48,8 +33,8 @@ document.getElementById("in").onchange = function(){
 
       len = colors.length;
 
-      can.width *= 2;
-      can.height *= 2;
+      can.width *= sVal;
+      can.height *= sVal;
 
       scale.style.display = "none";
       times.style.display = "none";
@@ -58,12 +43,15 @@ document.getElementById("in").onchange = function(){
       message.style.display = "block";
 
       for(let i = 0, j = 1; i < len; i += 4, ++j){
-        upscaled.push(colors[i], colors[i + 1], colors[i + 2], colors[i + 3], colors[i], colors[i + 1], colors[i + 2], colors[i + 3]);
-
-        storage.push(colors[i], colors[i + 1], colors[i + 2], colors[i + 3], colors[i], colors[i + 1], colors[i + 2], colors[i + 3]);
+        for(let k = 0; k < sVal; ++k){
+          upscaled.push(colors[i], colors[i + 1], colors[i + 2], colors[i + 3]);
+          storage.push(colors[i], colors[i + 1], colors[i + 2], colors[i + 3]);
+        }
 
         if(j % oWidth === 0){
-          upscaled.push(...storage);
+          for(let k = 1; k < sVal; ++k){
+            upscaled.push(...storage);
+          }
 
           storage = [];
         }
@@ -71,20 +59,11 @@ document.getElementById("in").onchange = function(){
 
       ctx.putImageData(new ImageData(Uint8ClampedArray.from(upscaled), can.width), 0, 0);
 
-      if(press !== 1){
-        input.src = can.toDataURL();
-
-        --press;
-      }
-      else{
-        prev = press = 0;
-
-        message.style.display = "none";
-        scale.style.display = "inline";
-        times.style.display = "inline";
-        br.style.display = "inline";
-        can.style.display = "block";
-      }
+      message.style.display = "none";
+      scale.style.display = "inline";
+      times.style.display = "inline";
+      br.style.display = "inline";
+      can.style.display = "block";
     }
   }
 
